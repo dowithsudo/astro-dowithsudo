@@ -21,11 +21,18 @@ export async function getStaticPaths() {
 
 const { category } = Astro.params;
 
-// get posts by category
 const BLOG_FOLDER = "blog";
-const posts = await getSinglePage(BLOG_FOLDER);
-const filterByCategories = taxonomyFilter(posts, "categories", category!);
-const sortedPosts = sortByDate(filterByCategories);
+const allPosts = await getSinglePage(BLOG_FOLDER);
+
+// 1. Filter berdasarkan kategori
+const filterByCategories = taxonomyFilter(allPosts, "categories", category!);
+
+// 2. PERBAIKAN: Filter khusus bahasa Inggris (en/) dan buang file index
+const posts = filterByCategories.filter((post) => 
+  post.id.startsWith("en/") && !post.id.includes("-index")
+);
+
+const sortedPosts = sortByDate(posts);
 ---
 
 <Base title={category}>
@@ -34,11 +41,17 @@ const sortedPosts = sortByDate(filterByCategories);
     <div class="container">
       <div class="row">
         {
-          sortedPosts.map((post) => (
-            <div class="mb-14 md:col-6 lg:col-4">
-              <BlogCard data={post} />
+          sortedPosts.length > 0 ? (
+            sortedPosts.map((post) => (
+              <div class="mb-14 md:col-6 lg:col-4">
+                <BlogCard data={post} />
+              </div>
+            ))
+          ) : (
+            <div class="col-12 text-center">
+              <p>No posts found in this category for English language.</p>
             </div>
-          ))
+          )
         }
       </div>
     </div>

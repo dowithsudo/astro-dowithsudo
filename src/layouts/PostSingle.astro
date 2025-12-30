@@ -13,8 +13,20 @@ import ImageMod from "./components/ImageMod.astro";
 const COLLECTION_FOLDER = "blog";
 const { post } = Astro.props;
 
-const posts = await getSinglePage(COLLECTION_FOLDER);
+// 1. Deteksi bahasa artikel saat ini
+const isEn = post.id.startsWith("en/");
+const langPath = isEn ? "/en" : "";
+
+// 2. Ambil semua post dan filter berdasarkan bahasa yang sama
+const allPosts = await getSinglePage(COLLECTION_FOLDER);
+const posts = allPosts.filter((item) => {
+  const sameLanguage = isEn ? item.id.startsWith("en/") : !item.id.startsWith("en/");
+  return sameLanguage;
+});
+
+// 3. Cari artikel terkait dari daftar yang sudah difilter bahasanya
 const similarPosts = similarItems(post, posts);
+
 const { Content } = await render(post);
 const { title, description, author, categories, image, date, tags } = post.data;
 ---
@@ -40,7 +52,7 @@ const { title, description, author, categories, image, date, tags } = post.data;
         <h1 set:html={markdownify(title)} class="h2 mb-4" />
         <ul class="mb-4">
           <li class="mr-4 inline-block">
-            <a href={`/authors/${slugify(author)}`}>
+            <a href={`${langPath}/authors/${slugify(author)}`}>
               <FaRegUserCircle className={"mr-2 -mt-1 inline-block"} />
               {humanize(author)}
             </a>
@@ -49,7 +61,7 @@ const { title, description, author, categories, image, date, tags } = post.data;
             <FaRegFolder className={"mr-2 -mt-1 inline-block"} />
             {
               categories.map((category: string, index: number) => (
-                <a href={`/categories/${slugify(category)}`}>
+                <a href={`${langPath}/categories/${slugify(category)}`}>
                   {humanize(category)}
                   {index !== categories.length - 1 && ","}
                 </a>
@@ -66,14 +78,14 @@ const { title, description, author, categories, image, date, tags } = post.data;
         </div>
         <div class="row items-start justify-between">
           <div class="mb-10 flex items-center lg:col-5 lg:mb-0">
-            <h5 class="mr-3">Tags :</h5>
+            <h5 class="mr-3">{isEn ? "Tags :" : "Tag :"}</h5>
             <ul>
               {
                 tags.map((tag: string) => (
                   <li class="inline-block">
                     <a
                       class="m-1 block rounded bg-light px-3 py-1 hover:bg-primary hover:text-white dark:bg-darkmode-light dark:hover:bg-darkmode-primary dark:hover:text-text-dark"
-                      href={`/tags/${slugify(tag)}`}
+                      href={`${langPath}/tags/${slugify(tag)}`}
                     >
                       {humanize(tag)}
                     </a>
@@ -83,7 +95,7 @@ const { title, description, author, categories, image, date, tags } = post.data;
             </ul>
           </div>
           <div class="flex items-center lg:col-4">
-            <h5 class="mr-3">Share :</h5>
+            <h5 class="mr-3">{isEn ? "Share :" : "Bagikan :"}</h5>
             <Share
               className="social-icons"
               title={title}
@@ -96,12 +108,13 @@ const { title, description, author, categories, image, date, tags } = post.data;
       </article>
     </div>
 
-    <!-- Related posts -->
     <div class="section pb-0">
-      <h2 class="h3 mb-12 text-center">Related Posts</h2>
+      <h2 class="h3 mb-12 text-center">
+        {isEn ? "Related Posts" : "Artikel Terkait"}
+      </h2>
       <div class="row justify-center">
         {
-          similarPosts.map((post) => (
+          similarPosts.slice(0, 3).map((post) => (
             <div class="lg:col-4 md:col-6 mb-14">
               <BlogCard data={post} />
             </div>

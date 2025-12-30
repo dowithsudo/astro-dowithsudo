@@ -7,7 +7,7 @@ image: "/images/image-placeholder.png"
 categories: ["Architecture", "punk"]
 author: "John Doe"
 lang: "en"
-tags: ["silicon", "technology", "dongdong"]
+tags: ["dongdong"]
 draft: false
 ---
 greenday

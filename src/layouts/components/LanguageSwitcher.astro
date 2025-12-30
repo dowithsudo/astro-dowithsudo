@@ -1,42 +1,40 @@
 ---
 const { pathname } = Astro.url;
-
-// Cek apakah halaman sekarang adalah bahasa Inggris
 const isEn = pathname.startsWith("/en");
 
-// Membersihkan pathname dari trailing slash di awal agar logika lebih konsisten
-const cleanPathname = pathname.endsWith("/") && pathname !== "/" 
-  ? pathname.slice(0, -1) 
-  : pathname;
-
 let targetUrl;
-
 if (isEn) {
-  // Jika di Inggris (/en/blog atau /en), hapus prefix /en
-  targetUrl = cleanPathname.replace("/en", "") || "/";
+  targetUrl = pathname.replace(/^\/en/, "") || "/";
 } else {
-  // Jika di Indonesia (/blog atau /), tambah prefix /en
-  // Pastikan tidak ada double slash jika di homepage
-  targetUrl = cleanPathname === "/" ? "/en" : `/en${cleanPathname}`;
+  targetUrl = `/en${pathname === "/" ? "" : pathname}`;
 }
 
-// Pastikan hasil akhir tidak memiliki trailing slash (sesuai config "never")
-if (targetUrl.length > 1 && targetUrl.endsWith("/")) {
-  targetUrl = targetUrl.slice(0, -1);
-}
+targetUrl = targetUrl.length > 1 && targetUrl.endsWith("/") 
+  ? targetUrl.slice(0, -1) 
+  : targetUrl;
 ---
 
-<div class="language-switcher ml-4 inline-flex items-center">
-  <a 
-    href={isEn ? targetUrl : pathname} 
-    class={`px-2 py-1 text-sm font-bold ${!isEn ? 'text-primary' : 'text-dark opacity-50 hover:opacity-100'}`}
+<div class="language-switcher ml-5 flex items-center gap-2 border-l border-border pl-5 dark:border-darkmode-border">
+  <a
+    href={isEn ? targetUrl : "#"}
+    class={`text-sm font-bold transition-all duration-300 ${
+      !isEn 
+        ? "text-primary cursor-default" 
+        : "text-text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+    }`}
   >
     ID
   </a>
-  <span class="text-gray-300">|</span>
-  <a 
-    href={!isEn ? targetUrl : pathname} 
-    class={`px-2 py-1 text-sm font-bold ${isEn ? 'text-primary' : 'text-dark opacity-50 hover:opacity-100'}`}
+  
+  <span class="text-border dark:text-darkmode-border">/</span>
+  
+  <a
+    href={!isEn ? targetUrl : "#"}
+    class={`text-sm font-bold transition-all duration-300 ${
+      isEn 
+        ? "text-primary cursor-default" 
+        : "text-text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+    }`}
   >
     EN
   </a>
