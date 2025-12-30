@@ -1,0 +1,85 @@
+---
+import BlogCard from "@/components/BlogCard.astro";
+import Pagination from "@/components/Pagination.astro";
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import PageHeader from "@/partials/PageHeader.astro";
+import PostSidebar from "@/partials/PostSidebar.astro";
+
+const BLOG_FOLDER = "blog";
+
+// 1. Ambil data header dari file index
+const postIndex = await getListPage(BLOG_FOLDER, "en/-index");
+
+// 2. Ambil SEMUA post
+const allPosts = await getSinglePage(BLOG_FOLDER);
+
+// Filter agar '-index' tidak dianggap sebagai artikel
+const posts = allPosts.filter((post) => 
+  post.id.startsWith("en/") && !post.id.includes("-index")
+);
+
+// 3. Filter Taxonomy untuk Sidebar (DIPERBAIKI: Case-Insensitive)
+const categories = await getTaxonomy(BLOG_FOLDER, "categories");
+const tags = await getTaxonomy(BLOG_FOLDER, "tags");
+
+// Filter kategori: mencocokkan tanpa peduli huruf besar/kecil
+const enCategories = categories.filter(c => 
+  posts.some(p => 
+    p.data.categories?.some((cat: string) => cat.toLowerCase() === c.toLowerCase())
+  )
+);
+
+// Filter tags: mencocokkan tanpa peduli huruf besar/kecil
+const enTags = tags.filter(t => 
+  posts.some(p => 
+    p.data.tags?.some((tag: string) => tag.toLowerCase() === t.toLowerCase())
+  )
+);
+
+// 4. Hitung Pagination secara akurat
+const sortedPosts = sortByDate(posts);
+const paginationLimit = config.settings.pagination; 
+const totalPages = Math.ceil(posts.length / paginationLimit);
+const currentPosts = sortedPosts.slice(0, paginationLimit);
+---
+
+<Base
+  title={postIndex.data.title}
+  meta_title={postIndex.data.meta_title}
+  description={postIndex.data.description}
+>
+  <PageHeader title={postIndex?.data.title} />
+  <section class="section">
+    <div class="container">
+      <div class="row gx-5">
+        <div class="lg:col-8">
+          <div class="row">
+            {
+              currentPosts.map((post) => (
+                <div class="mb-14 md:col-6">
+                  <BlogCard data={post} />
+                </div>
+              ))
+            }
+          </div>
+          
+          <Pagination
+            section="en/blog"
+            currentPage={1}
+            totalPages={totalPages}
+          />
+        </div>
+
+        <PostSidebar
+          categories={enCategories}
+          tags={enTags}
+          allCategories={categories}
+        />
+      </div>
+    </div>
+  </section>
+</Base>

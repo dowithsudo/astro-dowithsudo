@@ -14,6 +14,16 @@ export default defineConfig({
   site: config.site.base_url ? config.site.base_url : "http://examplesite.com",
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",
+
+  // TAMBAHKAN BLOK i18n DI SINI
+  i18n: {
+    defaultLocale: "id",
+    locales: ["id", "en"],
+    routing: {
+      prefixDefaultLocale: false, // id tetap di domain.com, en di domain.com/en
+    },
+  },
+
   image: { service: sharp() },
   vite: { plugins: [tailwindcss()] },
   integrations: [

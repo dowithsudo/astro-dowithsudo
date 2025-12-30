@@ -4,13 +4,18 @@ import Base from "@/layouts/Base.astro";
 import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
 import PageHeader from "@/partials/PageHeader.astro";
 
-const authorIndex = await getListPage("authors", "-index");
+// 1. Ambil teks halaman index dari folder 'id'
+const authorIndex = await getListPage("authors", "id/-index");
 
-if (authorIndex.data.draft) {
+if (!authorIndex || authorIndex.data.draft) {
   return Astro.redirect("/404");
 }
 
-const authors = await getSinglePage("authors");
+// 2. Ambil semua data penulis
+const allAuthors = await getSinglePage("authors");
+
+// 3. Filter agar hanya penulis di folder 'id' yang muncul
+const authors = allAuthors.filter((author) => author.id.startsWith("id/"));
 ---
 
 <Base title={authorIndex.data.title}>

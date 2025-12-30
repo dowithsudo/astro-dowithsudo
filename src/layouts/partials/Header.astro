@@ -1,6 +1,7 @@
 ---
 import Logo from "@/components/Logo.astro";
 import ThemeSwitcher from "@/components/ThemeSwitcher.astro";
+import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
 import { IoSearch } from "react-icons/io5";
@@ -20,15 +21,24 @@ export interface NavigationLink {
 const { main }: { main: NavigationLink[] } = menu;
 const { navigation_button, settings } = config;
 const { pathname } = Astro.url;
+
+// Deteksi bahasa
+const isEn = pathname.startsWith("/en");
+
+// Fungsi pembantu link
+const getRelativeUrl = (url: string) => {
+  if (!isEn) return url;
+  if (url.startsWith("/en")) return url;
+  const cleanedUrl = url.startsWith("/") ? url : `/${url}`;
+  return `/en${cleanedUrl}`.replace(/\/$/, "");
+};
 ---
 
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
   <nav class="navbar container">
-    <!-- logo -->
     <div class="order-0">
       <Logo />
     </div>
-    <!-- navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
@@ -45,7 +55,6 @@ const { pathname } = Astro.url;
           transform="rotate(45 10 10)"></polygon>
       </svg>
     </label>
-    <!-- /navbar toggler -->
     <ul
       id="nav-menu"
       class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
@@ -63,12 +72,10 @@ const { pathname } = Astro.url;
                 <label
                   for={`submenu-${menu.name}`}
                   class={`nav-link inline-flex items-center ${
-                    menu.children?.map(({ url }) => url).includes(pathname) ||
-                    menu.children
-                      ?.map(({ url }) => `${url}/`)
-                      .includes(pathname)
-                      ? "active"
-                      : ""
+                    menu.children?.some(child => {
+                      const relUrl = getRelativeUrl(child.url);
+                      return pathname === relUrl || pathname === `${relUrl}/`;
+                    }) ? "active" : ""
                   }`}
                 >
                   {menu.name}
@@ -80,12 +87,10 @@ const { pathname } = Astro.url;
                   {menu.children?.map((child) => (
                     <li class="nav-dropdown-item">
                       <a
-                        href={child.url}
+                        href={getRelativeUrl(child.url)}
                         aria-label={child.name}
                         class={`nav-dropdown-link block ${
-                          (pathname === `${child.url}/` ||
-                            pathname === child.url) &&
-                          "active"
+                          (pathname === getRelativeUrl(child.url) || pathname === `${getRelativeUrl(child.url)}/`) && "active"
                         }`}
                       >
                         {child.name}
@@ -97,10 +102,9 @@ const { pathname } = Astro.url;
             ) : (
               <li class="nav-item">
                 <a
-                  href={menu.url}
+                  href={getRelativeUrl(menu.url)}
                   class={`nav-link block ${
-                    (pathname === `${menu.url}/` || pathname === menu.url) &&
-                    "active"
+                    (pathname === getRelativeUrl(menu.url) || pathname === `${getRelativeUrl(menu.url)}/`) && "active"
                   }`}
                 >
                   {menu.name}
@@ -115,7 +119,7 @@ const { pathname } = Astro.url;
           <li class="mt-4 inline-block lg:hidden">
             <a
               class="btn btn-outline-primary btn-sm"
-              href={navigation_button.link}
+              href={getRelativeUrl(navigation_button.link)}
             >
               {navigation_button.label}
             </a>
@@ -123,11 +127,13 @@ const { pathname } = Astro.url;
         )
       }
     </ul>
+
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+      <LanguageSwitcher />
       {
         settings.search && (
           <button
-            class="border-border text-text-dark hover:text-primary dark:border-darkmode-border mr-5 inline-block border-r pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
+            class="border-border text-text-dark hover:text-primary dark:border-darkmode-border ml-5 mr-5 inline-block border-l border-r pl-5 pr-5 text-xl dark:text-white dark:hover:text-darkmode-primary"
             aria-label="search"
             data-search-trigger
           >
@@ -140,7 +146,7 @@ const { pathname } = Astro.url;
         navigation_button.enable && (
           <a
             class="btn btn-outline-primary btn-sm hidden lg:inline-block"
-            href={navigation_button.link}
+            href={getRelativeUrl(navigation_button.link)}
           >
             {navigation_button.label}
           </a>

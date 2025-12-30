@@ -1,0 +1,36 @@
+---
+import AuthorCard from "@/components/AuthorCard.astro";
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import PageHeader from "@/partials/PageHeader.astro";
+
+// 1. Ambil data halaman index dari folder 'en'
+const authorIndex = await getListPage("authors", "en/-index");
+
+if (!authorIndex || authorIndex.data.draft) {
+  return Astro.redirect("/404");
+}
+
+// 2. Ambil semua data penulis
+const allAuthors = await getSinglePage("authors");
+
+// 3. FILTER: Hanya tampilkan penulis yang berada di folder 'en/'
+const authors = allAuthors.filter((author) => author.id.startsWith("en/"));
+---
+
+<Base title={authorIndex.data.title}>
+  <PageHeader title={authorIndex.data.title} />
+  <section class="section-sm pb-0">
+    <div class="container">
+      <div class="row justify-center">
+        {
+          authors.map((author) => (
+            <div class="mb-14 md:col-6 lg:col-4">
+              <AuthorCard data={author} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

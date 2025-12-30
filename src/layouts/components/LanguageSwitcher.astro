@@ -1,0 +1,43 @@
+---
+const { pathname } = Astro.url;
+
+// Cek apakah halaman sekarang adalah bahasa Inggris
+const isEn = pathname.startsWith("/en");
+
+// Membersihkan pathname dari trailing slash di awal agar logika lebih konsisten
+const cleanPathname = pathname.endsWith("/") && pathname !== "/" 
+  ? pathname.slice(0, -1) 
+  : pathname;
+
+let targetUrl;
+
+if (isEn) {
+  // Jika di Inggris (/en/blog atau /en), hapus prefix /en
+  targetUrl = cleanPathname.replace("/en", "") || "/";
+} else {
+  // Jika di Indonesia (/blog atau /), tambah prefix /en
+  // Pastikan tidak ada double slash jika di homepage
+  targetUrl = cleanPathname === "/" ? "/en" : `/en${cleanPathname}`;
+}
+
+// Pastikan hasil akhir tidak memiliki trailing slash (sesuai config "never")
+if (targetUrl.length > 1 && targetUrl.endsWith("/")) {
+  targetUrl = targetUrl.slice(0, -1);
+}
+---
+
+<div class="language-switcher ml-4 inline-flex items-center">
+  <a 
+    href={isEn ? targetUrl : pathname} 
+    class={`px-2 py-1 text-sm font-bold ${!isEn ? 'text-primary' : 'text-dark opacity-50 hover:opacity-100'}`}
+  >
+    ID
+  </a>
+  <span class="text-gray-300">|</span>
+  <a 
+    href={!isEn ? targetUrl : pathname} 
+    class={`px-2 py-1 text-sm font-bold ${isEn ? 'text-primary' : 'text-dark opacity-50 hover:opacity-100'}`}
+  >
+    EN
+  </a>
+</div>

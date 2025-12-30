@@ -1,0 +1,35 @@
+---
+import Base from "@/layouts/Base.astro";
+import PostSingle from "@/layouts/PostSingle.astro";
+import { getSinglePage } from "@/lib/contentParser.astro";
+
+export async function getStaticPaths() {
+  const BLOG_FOLDER = "blog";
+  const allPosts = await getSinglePage(BLOG_FOLDER);
+
+  // FILTER: Hanya ambil file yang ada di dalam sub-folder "en"
+  const posts = allPosts.filter((post) => post.id.startsWith("en/"));
+
+  const paths = posts.map((post) => ({
+    params: {
+      // replace "en/" agar URL menjadi /en/blog/judul-post 
+      // bukan /en/blog/en/judul-post
+      single: post.id.replace("en/", ""),
+    },
+    props: { post },
+  }));
+  return paths;
+}
+
+const { post } = Astro.props;
+const { title, meta_title, description, image } = post.data;
+---
+
+<Base
+  title={title}
+  meta_title={meta_title}
+  description={description}
+  image={image}
+>
+  <PostSingle post={post} />
+</Base>

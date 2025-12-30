@@ -5,13 +5,15 @@ import { getListPage } from "@/lib/contentParser.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { render } from "astro:content";
 
-const aboutIndex = await getListPage("about", "-index");
-const { Content } = await render(aboutIndex);
-const { title, description, meta_title, image } = aboutIndex.data;
+// Mengarahkan ke folder id
+const aboutIndex = await getListPage("about", "id/-index");
 
-if (aboutIndex.data.draft) {
+if (!aboutIndex || aboutIndex.data.draft) {
   return Astro.redirect("/404");
 }
+
+const { Content } = await render(aboutIndex);
+const { title, description, meta_title, image } = aboutIndex.data;
 ---
 
 <Base

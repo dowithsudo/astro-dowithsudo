@@ -1,0 +1,90 @@
+---
+import BlogCard from "@/components/BlogCard.astro";
+import Pagination from "@/components/Pagination.astro";
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
+import { getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { sortByDate } from "@/lib/utils/sortFunctions";
+import PageHeader from "@/partials/PageHeader.astro";
+import PostSidebar from "@/partials/PostSidebar.astro";
+
+// Definisi tipe data untuk props Pagination Astro
+export interface Props {
+  page: {
+    data: any[];
+    currentPage: number;
+    lastPage: number;
+    url: {
+      prev: string | undefined;
+      next: string | undefined;
+    };
+  };
+}
+
+export async function getStaticPaths({ paginate }: any) {
+  const BLOG_FOLDER = "blog";
+  const allPosts = await getSinglePage(BLOG_FOLDER);
+  // Filter hanya artikel bahasa Indonesia
+  const idPosts = allPosts.filter((post) => post.id.startsWith("id/"));
+  const sortedPosts = sortByDate(idPosts);
+
+  return paginate(sortedPosts, {
+    pageSize: config.settings.pagination,
+  });
+}
+
+const { page } = Astro.props as Props;
+const BLOG_FOLDER = "blog";
+const postIndex = await getListPage(BLOG_FOLDER, "id/-index");
+
+// Filter Taxonomy untuk Sidebar (Hanya yang milik artikel Indo)
+const categories = await getTaxonomy(BLOG_FOLDER, "categories");
+const tags = await getTaxonomy(BLOG_FOLDER, "tags");
+
+// Kita perlu semua post Indo untuk memfilter sidebar di halaman pagination
+const allPosts = await getSinglePage(BLOG_FOLDER);
+const idPosts = allPosts.filter((post) => post.id.startsWith("id/"));
+
+const idCategories = categories.filter(c => 
+  idPosts.some(post => post.data.categories?.includes(c))
+);
+const idTags = tags.filter(t => 
+  idPosts.some(post => post.data.tags?.includes(t))
+);
+---
+
+<Base
+  title={postIndex.data.title}
+  meta_title={postIndex.data.meta_title}
+  description={postIndex.data.description}
+>
+  <PageHeader title={postIndex.data.title} />
+  <section class="section">
+    <div class="container">
+      <div class="row gx-5">
+        <div class="lg:col-8">
+          <div class="row">
+            {
+              page.data.map((post) => (
+                <div class="mb-14 md:col-6">
+                  <BlogCard data={post} />
+                </div>
+              ))
+            }
+          </div>
+          <Pagination
+            section={BLOG_FOLDER}
+            currentPage={page.currentPage}
+            totalPages={page.lastPage}
+          />
+        </div>
+        <PostSidebar 
+          categories={idCategories} 
+          tags={idTags} 
+          allCategories={categories} 
+        />
+      </div>
+    </div>
+  </section>
+</Base>

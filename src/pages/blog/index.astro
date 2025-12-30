@@ -4,37 +4,53 @@ import Pagination from "@/components/Pagination.astro";
 import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getListPage, getSinglePage } from "@/lib/contentParser.astro";
-import { getAllTaxonomy, getTaxonomy } from "@/lib/taxonomyParser.astro";
+import { getTaxonomy } from "@/lib/taxonomyParser.astro";
 import { sortByDate } from "@/lib/utils/sortFunctions";
 import PageHeader from "@/partials/PageHeader.astro";
 import PostSidebar from "@/partials/PostSidebar.astro";
 
 const BLOG_FOLDER = "blog";
+const postIndex = await getListPage(BLOG_FOLDER, "id/-index");
+const allPosts = await getSinglePage(BLOG_FOLDER);
 
-const postIndex = await getListPage(BLOG_FOLDER, "-index");
-if (postIndex.data.draft) {
-  return Astro.redirect("/404");
-}
-const posts = await getSinglePage(BLOG_FOLDER);
-const allCategories = await getAllTaxonomy(BLOG_FOLDER, "categories");
-const categories = await getTaxonomy(BLOG_FOLDER, "categories");
-const tags = await getTaxonomy(BLOG_FOLDER, "tags");
+// 1. Filter hanya bahasa Indonesia (id/) dan buang index
+const posts = allPosts.filter((post) => 
+  post.id.startsWith("id/") && !post.id.includes("-index")
+);
+
+// 2. Ambil Semua Taxonomy Global
+const allCategories = await getTaxonomy(BLOG_FOLDER, "categories");
+const allTags = await getTaxonomy(BLOG_FOLDER, "tags");
+
+// 3. FILTER TAXONOMY: Hanya ambil yang dipakai oleh postingan Indonesia (Case-Insensitive)
+const idCategories = allCategories.filter(c => 
+  posts.some(p => 
+    p.data.categories?.some((cat: string) => cat.toLowerCase() === c.toLowerCase())
+  )
+);
+
+const idTags = allTags.filter(t => 
+  posts.some(p => 
+    p.data.tags?.some((tag: string) => tag.toLowerCase() === t.toLowerCase())
+  )
+);
+
+// 4. Hitung Pagination dan Sorting
 const sortedPosts = sortByDate(posts);
-const totalPages: number = Math.ceil(posts.length / config.settings.pagination);
-const currentPosts = sortedPosts.slice(0, config.settings.pagination);
+const { pagination } = config.settings;
+const totalPages = Math.ceil(posts.length / pagination);
+const currentPosts = sortedPosts.slice(0, pagination);
 ---
 
 <Base
   title={postIndex.data.title}
   meta_title={postIndex.data.meta_title}
-  image={postIndex.data.image}
   description={postIndex.data.description}
 >
-  <PageHeader title={postIndex?.data.title} />
+  <PageHeader title={postIndex.data.title} />
   <section class="section">
     <div class="container">
       <div class="row gx-5">
-        <!-- blog posts -->
         <div class="lg:col-8">
           <div class="row">
             {
@@ -52,10 +68,9 @@ const currentPosts = sortedPosts.slice(0, config.settings.pagination);
           />
         </div>
 
-        <!-- sidebar -->
         <PostSidebar
-          categories={categories}
-          tags={tags}
+          categories={idCategories}
+          tags={idTags}
           allCategories={allCategories}
         />
       </div>

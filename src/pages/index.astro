@@ -7,15 +7,24 @@ import CallToAction from "@/partials/CallToAction.astro";
 import Testimonial from "@/partials/Testimonial.astro";
 import { FaCheck } from "react-icons/fa";
 
-const homepage = await getListPage("homepage", "-index");
-const call_to_action = await getListPage("ctaSection", "call-to-action");
-const testimonial = await getListPage("testimonialSection", "testimonial");
+// Ambil konten dari sub-folder 'id'
+const homepage = await getListPage("homepage", "id/-index");
+const call_to_action = await getListPage("ctaSection", "id/call-to-action");
+const testimonial = await getListPage("testimonialSection", "id/testimonial");
 
 const { banner, features } = homepage.data;
+const { pathname } = Astro.url;
+
+// Fungsi agar link tombol tetap di folder bahasa yang benar (jika diperlukan)
+const isEn = pathname.startsWith("/en");
+const getRelativeUrl = (url: string) => {
+  if (!isEn) return url;
+  if (url.startsWith("http") || url.startsWith("/en")) return url;
+  return `/en${url.startsWith("/") ? url : "/" + url}`;
+};
 ---
 
-<Base>
-  <!-- Banner -->
+<Base title={homepage.data.title} meta_title={homepage.data.meta_title} description={homepage.data.description}>
   <section class="section pt-14">
     <div class="container">
       <div class="row justify-center">
@@ -29,7 +38,7 @@ const { banner, features } = homepage.data;
             banner.button.enable && (
               <a
                 class="btn btn-primary"
-                href={banner.button.link}
+                href={getRelativeUrl(banner.button.link)}
                 target={
                   banner.button.link.startsWith("http") ? "_blank" : "_self"
                 }
@@ -56,9 +65,6 @@ const { banner, features } = homepage.data;
       </div>
     </div>
   </section>
-  <!-- /Banner -->
-
-  <!-- Features -->
   {
     features.map((feature, index: number) => (
       <section class={`section-sm ${index % 2 === 0 && "bg-gradient"}`}>
@@ -87,7 +93,7 @@ const { banner, features } = homepage.data;
                 ))}
               </ul>
               {feature.button.enable && (
-                <a class="btn btn-primary mt-5" href={feature.button.link}>
+                <a class="btn btn-primary mt-5" href={getRelativeUrl(feature.button.link)}>
                   {feature.button.label}
                 </a>
               )}
@@ -97,8 +103,6 @@ const { banner, features } = homepage.data;
       </section>
     ))
   }
-  <!-- /Features -->
-
   <Testimonial testimonial={testimonial} />
   <CallToAction call_to_action={call_to_action} />
 </Base>

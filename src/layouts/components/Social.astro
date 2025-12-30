@@ -7,11 +7,14 @@ export interface ISocial {
   icon: string;
   link: string;
 }
+
+// PERBAIKAN: Pastikan source selalu berupa array agar .map() tidak error
+const socialLinks: ISocial[] = source || [];
 ---
 
 <ul class={className}>
   {
-    source.map((social: ISocial) => (
+    socialLinks.map((social: ISocial) => (
       <li>
         <a
           aria-label={social.name}

@@ -7,12 +7,15 @@ import { render } from "astro:content";
 // get static paths for all pages
 export async function getStaticPaths() {
   const COLLECTION_FOLDER = "pages";
-
   const pages = await getSinglePage(COLLECTION_FOLDER);
 
-  const paths = pages.map((page) => ({
+  // FILTER: Hanya ambil file dari folder 'id/'
+  const idPages = pages.filter((page) => page.id.startsWith("id/"));
+
+  const paths = idPages.map((page) => ({
     params: {
-      regular: page.id,
+      // Menghapus 'id/' agar slug URL menjadi 'elements' bukan 'id/elements'
+      regular: page.id.replace("id/", ""),
     },
     props: { page },
   }));

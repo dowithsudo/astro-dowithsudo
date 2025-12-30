@@ -1,13 +1,16 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+// Common fields with lang support
 const commonFields = {
   title: z.string(),
   description: z.string(),
   meta_title: z.string().optional(),
   date: z.date().optional(),
   image: z.string().optional(),
-  draft: z.boolean(),
+  draft: z.boolean().optional(),
+  // Tambahkan bahasa ke field umum
+  lang: z.enum(["id", "en"]).default("id"),
 };
 
 // Post collection schema
@@ -23,6 +26,7 @@ const blogCollection = defineCollection({
     categories: z.array(z.string()).default(["others"]),
     tags: z.array(z.string()).default(["others"]),
     draft: z.boolean().optional(),
+    lang: z.enum(["id", "en"]).default("id"), // Tambahkan lang
   }),
 });
 
@@ -42,7 +46,6 @@ const authorsCollection = defineCollection({
           .optional(),
       )
       .optional(),
-    draft: z.boolean().optional(),
   }),
 });
 
@@ -74,6 +77,7 @@ const contactCollection = defineCollection({
 const homepageCollection = defineCollection({
   loader: glob({ pattern: "**/-*.{md,mdx}", base: "src/content/homepage" }),
   schema: z.object({
+    lang: z.enum(["id", "en"]).default("id"), // Tambahkan lang
     banner: z.object({
       title: z.string(),
       content: z.string(),
@@ -103,10 +107,11 @@ const homepageCollection = defineCollection({
 // Call to Action collection schema
 const ctaSectionCollection = defineCollection({
   loader: glob({
-    pattern: "call-to-action.{md,mdx}",
+    pattern: "**/call-to-action.{md,mdx}", // Ubah pattern agar bisa baca di subfolder id/en
     base: "src/content/sections",
   }),
   schema: z.object({
+    lang: z.enum(["id", "en"]).default("id"), // Tambahkan lang
     enable: z.boolean(),
     title: z.string(),
     description: z.string(),
@@ -122,10 +127,11 @@ const ctaSectionCollection = defineCollection({
 // Testimonials Section collection schema
 const testimonialSectionCollection = defineCollection({
   loader: glob({
-    pattern: "testimonial.{md,mdx}",
+    pattern: "**/testimonial.{md,mdx}", // Ubah pattern agar bisa baca di subfolder id/en
     base: "src/content/sections",
   }),
   schema: z.object({
+    lang: z.enum(["id", "en"]).default("id"), // Tambahkan lang
     enable: z.boolean(),
     title: z.string(),
     description: z.string(),
@@ -142,15 +148,12 @@ const testimonialSectionCollection = defineCollection({
 
 // Export collections
 export const collections = {
-  // Pages
   homepage: homepageCollection,
   blog: blogCollection,
   authors: authorsCollection,
   pages: pagesCollection,
   about: aboutCollection,
   contact: contactCollection,
-
-  // sections
   ctaSection: ctaSectionCollection,
   testimonialSection: testimonialSectionCollection,
 };

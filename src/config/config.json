@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Astroplate",
-    "base_url": "https://astroplate.netlify.app",
+    "base_url": "https://dowithsudo.com",
     "base_path": "/",
     "trailing_slash": false,
     "favicon": "/images/favicon.png",
@@ -23,14 +23,14 @@
   },
 
   "announcement": {
-    "enable": true,
+    "enable": false,
     "content": "<span class='text-center block'>♥️ Loving Astroplate? <a class='underline' href='https://github.com/zeon-studio/astroplate' target='_blank' rel='noopener'>Please ⭐️ on Github</a></span>",
     "expire_days": 7
   },
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
+    "copyright": "copyright @dowithsudo 2026. All rights reserved."
   },
 
   "navigation_button": {
