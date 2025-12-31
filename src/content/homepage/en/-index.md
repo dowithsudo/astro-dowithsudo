@@ -8,7 +8,7 @@ banner:
   button:
     enable: true
     label: "Get Started For Free"
-    link: "https://github.com/zeon-studio/astroplate"
+    link: "/contact"
 
 # Features
 features:
@@ -23,9 +23,9 @@ features:
       - "SEO-optimized for better search engine rankings"
       - "**Open-source and free** for personal and commercial use"
     button:
-      enable: false
-      label: "Get Started Now"
-      link: "#"
+      enable: true
+      label: "Our Services"
+      link: "/services"
 
   - title: "Discover the Key Features Of Astro"
     image: "/images/service-2.png"

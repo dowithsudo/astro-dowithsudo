@@ -8,7 +8,7 @@ banner:
   button:
     enable: true
     label: "Konsultasi Gratis Sekarang"
-    link: "https://wa.me/nomorkamu"
+    link: "/contact"
 
 # Features
 features:
@@ -25,8 +25,8 @@ features:
       - "**Dukungan IT Umum:** Penanganan harian untuk segala perangkat IT kantor Anda."
     button:
       enable: true
-      label: "Konsultasi Sekarang"
-      link: "#"
+      label: "Selengkapnya"
+      link: "/services"
 
   - title: "Langkah Mudah Menuju Bisnis yang Lebih Modern"
     image: "/images/service-2.png"

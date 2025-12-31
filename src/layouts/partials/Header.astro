@@ -3,7 +3,9 @@ import Logo from "@/components/Logo.astro";
 import ThemeSwitcher from "@/components/ThemeSwitcher.astro";
 import LanguageSwitcher from "@/components/LanguageSwitcher.astro";
 import config from "@/config/config.json";
-import menu from "@/config/menu.json";
+// Import kedua file menu
+import menuEn from "@/config/menu.json";
+import menuId from "@/config/menu.id.json";
 import { IoSearch } from "react-icons/io5";
 
 export interface ChildNavigationLink {
@@ -18,15 +20,19 @@ export interface NavigationLink {
   children?: ChildNavigationLink[];
 }
 
-const { main }: { main: NavigationLink[] } = menu;
 const { navigation_button, settings } = config;
 const { pathname } = Astro.url;
 
-// Deteksi bahasa
-const isEn = pathname.startsWith("/en");
+// 1. Deteksi apakah bahasa saat ini Indonesia
+const isId = pathname.startsWith("/id") || !pathname.startsWith("/en");
+
+// 2. Pilih menu berdasarkan bahasa
+const menuData = isId ? menuId : menuEn;
+const { main }: { main: NavigationLink[] } = menuData;
 
 // Fungsi pembantu link
 const getRelativeUrl = (url: string) => {
+  const isEn = pathname.startsWith("/en");
   if (!isEn) return url;
   if (url.startsWith("/en")) return url;
   const cleanedUrl = url.startsWith("/") ? url : `/${url}`;
@@ -73,7 +79,7 @@ const getRelativeUrl = (url: string) => {
                 />
                 <label
                   for={`submenu-${menu.name}`}
-                  class={`nav-link inline-flex items-center ${
+                  class={`nav-link inline-flex items-center text-[17px] font-semibold ${
                     menu.children?.some(child => {
                       const relUrl = getRelativeUrl(child.url);
                       return pathname === relUrl || pathname === `${relUrl}/`;
@@ -116,18 +122,6 @@ const getRelativeUrl = (url: string) => {
           </>
         ))
       }
-      {
-        navigation_button.enable && (
-          <li class="mt-4 inline-block lg:hidden">
-            <a
-              class="btn btn-outline-primary btn-sm"
-              href={getRelativeUrl(navigation_button.link)}
-            >
-              {navigation_button.label}
-            </a>
-          </li>
-        )
-      }
     </ul>
 
     <div class="order-1 flex items-center md:order-2">
@@ -144,16 +138,6 @@ const getRelativeUrl = (url: string) => {
         )
       }
       <ThemeSwitcher className="mr-5" />
-      {
-        navigation_button.enable && (
-          <a
-            class="btn btn-outline-primary btn-sm hidden lg:inline-block"
-            href={getRelativeUrl(navigation_button.link)}
-          >
-            {navigation_button.label}
-          </a>
-        )
-      }
     </div>
   </nav>
 </header>

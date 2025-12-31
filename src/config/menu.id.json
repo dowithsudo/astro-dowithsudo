@@ -1,11 +1,11 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "Beranda",
       "url": "/"
     },
     {
-      "name": "Services",
+      "name": "Layanan",
       "url": "/services"
     },
     {
@@ -13,21 +13,21 @@
       "url": "/blog"
     },
     {
-      "name": "About Me",
+      "name": "Tentang Saya",
       "url": "/about"
     },
     {
-      "name": "Contact",
+      "name": "Kontak",
       "url": "/contact"
     }
   ],
   "footer": [
     {
-      "name": "Privacy Policy",
+      "name": "Kebijakan Privasi",
       "url": "/privacy-policy"
     },
     {
-      "name": "Contact",
+      "name": "Kontak",
       "url": "/contact"
     }
   ]
