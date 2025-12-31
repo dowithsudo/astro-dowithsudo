@@ -1,52 +1,52 @@
 ---
 # Banner
 banner:
-  title: "The Ultimate Starter Template You Need To Start Your Astro Project"
-  content: "Astroplate is a free starter template built with Astro and TailwindCSS, providing everything you need to jumpstart your Astro project and save valuable time."
-  image: "/images/banner2.png"
+  title: "Get Your Own IT Department Without High Operational Costs"
+  content: "From hardware selection and secure network setup to keeping systems online 24/7. Professional IT solutions with a personal and transparent approach."
+  image: "/images/banner.png"
   lang: "en"
   button:
     enable: true
-    label: "Get Started For Free"
+    label: "Get Free Consultation Now"
     link: "/contact"
 
 # Features
 features:
-  - title: "What's Included in Astroplate"
+  - title: "Focus on Your Business, Let Us Handle Your IT"
     image: "/images/service-1.png"
-    content: "Astroplate is a comprehensive starter template that includes everything you need to get started with your Astro project. What's Included in Astroplate"
+    content: >-
+      Don't let technical obstacles hinder your operations. With over **14 years** of experience, we are ready to take over all your IT challenges so you can get back to focusing on **growing your business**.
     bulletpoints:
-      - "10+ Pre-build pages"
-      - "95+ Google Pagespeed Score"
-      - "Build with Astro and TailwindCSS for easy and customizable styling"
-      - "Fully responsive on all devices"
-      - "SEO-optimized for better search engine rankings"
-      - "**Open-source and free** for personal and commercial use"
+      - "**Managed IT Support:** On-site and Remote technical assistance services."
+      - "**Network Infrastructure:** WiFi, LAN optimization, and network security."
+      - "**Server & Cloud:** Stable server management and cloud infrastructure."
+      - "**Security & Consultation:** Corporate data protection and IT strategy consulting."
+      - "**IT Automation:** Improving work efficiency with the right automation systems."
+      - "**General IT Support:** Daily handling for all your office IT devices."
     button:
       enable: true
-      label: "Our Services"
+      label: "Read More"
       link: "/services"
 
-  - title: "Discover the Key Features Of Astro"
+  - title: "Simple Steps Toward a More Modern Business"
     image: "/images/service-2.png"
-    content: "Astro is an all-in-one web framework for building fast, content-focused websites. It offers a range of exciting features for developers and website creators. Some of the key features are:"
+    content: "With a measurable and transparent process, we turn digital infrastructure complexities into assets that support your business growth."
     bulletpoints:
-      - "Zero JS, by default: No JavaScript runtime overhead to slow you down."
-      - "Customizable: Tailwind, MDX, and 100+ other integrations to choose from."
-      - "UI-agnostic: Supports React, Preact, Svelte, Vue, Solid, Lit and more."
+      - "**Comprehensive Audit:** Health checks of networks, servers, and devices to map risks and identify the right optimization opportunities."
+      - "**Right-Fit Solutions:** Best-in-class infrastructure recommendations tailored specifically for your current and future business scale."
+      - "**Industry Standard Implementation:** Professional execution with complete documentation, ensuring your systems are secure, stable, and easy to manage."
     button:
       enable: true
-      label: "Get Started Now"
-      link: "https://github.com/zeon-studio/astroplate"
+      label: "Discuss Your Needs Now"
+      link: "#"
 
-  - title: "The Top Reasons to Choose Astro for Your Next Project"
+  - title: "Why Choose Us?"
     image: "/images/service-3.png"
-    content: "With Astro, you can build modern and content-focused websites without sacrificing performance or ease of use."
+    content: "More than just IT support, we are strategic partners ensuring technology works for your business progress."
     bulletpoints:
-      - "Instantly load static sites for better user experience and SEO."
-      - "Intuitive syntax and support for popular frameworks make learning and using Astro a breeze."
-      - "Use any front-end library or framework, or build custom components, for any project size."
-      - "Built on cutting-edge technology to keep your projects up-to-date with the latest web standards."
+      - "**14+ Years of Experience:** A long track record in handling various IT infrastructures with proven solutions."
+      - "**Full Transparency:** Honest, transparent, and easy-to-understand hardware procurement reports and technical details."
+      - "**Responsive Support:** Fast response and agile solutions without bureaucracy, directly connecting you with your IT experts."
     button:
       enable: false
       label: ""

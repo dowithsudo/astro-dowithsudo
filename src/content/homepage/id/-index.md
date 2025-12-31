@@ -30,7 +30,7 @@ features:
 
   - title: "Langkah Mudah Menuju Bisnis yang Lebih Modern"
     image: "/images/service-2.png"
-    content: "Dengan proses yang terukur dan transparan, saya mengubah kerumitan infrastruktur digital menjadi aset yang mendukung pertumbuhan bisnis Anda."
+    content: "Dengan proses yang terukur dan transparan, kami mengubah kerumitan infrastruktur digital menjadi aset yang mendukung pertumbuhan bisnis Anda."
     bulletpoints:
       - "**Audit Menyeluruh:** Pengecekan kesehatan jaringan, server, dan perangkat untuk memetakan risiko serta peluang optimasi yang tepat."
       - "**Solusi Tepat Guna:** Rekomendasi infrastruktur terbaik yang dirancang khusus untuk skala bisnis Anda saat ini maupun masa depan."
