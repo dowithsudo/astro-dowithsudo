@@ -1,9 +1,42 @@
+/* 1. DEKLARASI FONT LOKAL (INTER V20) */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/fonts/inter-v20-latin-500.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
+  font-display: swap;
+}
+
+/* 2. SET VARIABEL FONT UTAMA (Paksa pakai !important) */
+:root {
+  --font-primary: 'Inter', sans-serif !important;
+  --font-secondary: 'Inter', sans-serif !important;
+}
+
+/* 3. IMPLEMENTASI CSS */
 html {
   @apply text-base-sm md:text-base;
+  font-family: 'Inter', sans-serif !important;
 }
 
 body {
-  @apply bg-body text-base dark:bg-darkmode-body font-primary font-normal leading-relaxed text-text dark:text-darkmode-text;
+  /* Memastikan body menggunakan Inter dan override default tema */
+  @apply bg-body text-base dark:bg-darkmode-body font-normal leading-relaxed text-text dark:text-darkmode-text;
+  font-family: 'Inter', sans-serif !important;
 }
 
 h1,
@@ -12,7 +45,9 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-secondary font-bold leading-tight text-text-dark dark:text-darkmode-text-dark;
+  /* Memastikan semua judul juga pakai Inter */
+  @apply font-bold leading-tight text-text-dark dark:text-darkmode-text-dark;
+  font-family: 'Inter', sans-serif !important;
 }
 
 h1,
