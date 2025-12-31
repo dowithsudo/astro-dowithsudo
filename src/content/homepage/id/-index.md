@@ -12,10 +12,10 @@ banner:
 
 # Features
 features:
-  - title: "Anda Urus Bisnis, Biar Saya Urus IT Anda"
+  - title: "Anda Urus Bisnis, Biar Kami Urus IT Anda"
     image: "/images/service-1.png"
     content: >-
-      Jangan biarkan kendala teknis menghambat operasional. Dengan pengalaman lebih dari **14 tahun**, saya siap mengambil alih seluruh permasalahan IT Anda agar Anda bisa kembali fokus dalam **mengembangkan bisnis**.
+      Jangan biarkan kendala teknis menghambat operasional. Dengan pengalaman lebih dari **14 tahun**, kami siap mengambil alih seluruh permasalahan IT Anda agar Anda bisa kembali fokus dalam **mengembangkan bisnis**.
     bulletpoints:
       - "**Managed IT Support:** Layanan bantuan teknis baik *On-site* maupun *Remote*."
       - "**Infrastruktur Jaringan:** Optimasi koneksi WiFi, LAN, dan keamanan jaringan."
