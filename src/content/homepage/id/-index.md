@@ -1,52 +1,52 @@
 ---
 # Banner
 banner:
-  title: "Indo The Ultimate Starter Template You Need To Start Your Astro Project"
-  content: "Astroplate is a free starter template built with Astro and TailwindCSS, providing everything you need to jumpstart your Astro project and save valuable time."
+  title: "Miliki Departemen IT Sendiri Tanpa Biaya Operasional yang Tinggi"
+  content: "Mulai dari pemilihan hardware, setting jaringan aman, hingga jaga sistem tetap online 24/7. Solusi IT profesional dengan pendekatan personal dan transparan."
   image: "/images/banner.png"
   lang: "id"
   button:
     enable: true
-    label: "Get Started For Free"
-    link: "https://github.com/zeon-studio/astroplate"
+    label: "Konsultasi Gratis Sekarang"
+    link: "https://wa.me/nomorkamu"
 
 # Features
 features:
-  - title: "What's Included in Astroplate"
+  - title: "Anda Urus Bisnis, Biar Saya Urus IT Anda"
     image: "/images/service-1.png"
-    content: "Astroplate is a comprehensive starter template that includes everything you need to get started with your Astro project. What's Included in Astroplate"
+    content: >-
+      Jangan biarkan kendala teknis menghambat operasional. Dengan pengalaman lebih dari **14 tahun**, saya siap mengambil alih seluruh permasalahan IT Anda agar Anda bisa kembali fokus dalam **mengembangkan bisnis**.
     bulletpoints:
-      - "10+ Pre-build pages"
-      - "95+ Google Pagespeed Score"
-      - "Build with Astro and TailwindCSS for easy and customizable styling"
-      - "Fully responsive on all devices"
-      - "SEO-optimized for better search engine rankings"
-      - "**Open-source and free** for personal and commercial use"
-    button:
-      enable: false
-      label: "Get Started Now"
-      link: "#"
-
-  - title: "Discover the Key Features Of Astro"
-    image: "/images/service-2.png"
-    content: "Astro is an all-in-one web framework for building fast, content-focused websites. It offers a range of exciting features for developers and website creators. Some of the key features are:"
-    bulletpoints:
-      - "Zero JS, by default: No JavaScript runtime overhead to slow you down."
-      - "Customizable: Tailwind, MDX, and 100+ other integrations to choose from."
-      - "UI-agnostic: Supports React, Preact, Svelte, Vue, Solid, Lit and more."
+      - "**Managed IT Support:** Layanan bantuan teknis baik *On-site* maupun *Remote*."
+      - "**Infrastruktur Jaringan:** Optimasi koneksi WiFi, LAN, dan keamanan jaringan."
+      - "**Server & Cloud:** Pengelolaan server dan cloud management yang stabil."
+      - "**Keamanan & Konsultasi:** Proteksi data perusahaan dan konsultasi strategi IT."
+      - "**IT Otomasi:** Efisiensi kerja dengan sistem otomatisasi tepat guna."
+      - "**Dukungan IT Umum:** Penanganan harian untuk segala perangkat IT kantor Anda."
     button:
       enable: true
-      label: "Get Started Now"
-      link: "https://github.com/zeon-studio/astroplate"
+      label: "Konsultasi Sekarang"
+      link: "#"
 
-  - title: "The Top Reasons to Choose Astro for Your Next Project"
-    image: "/images/service-3.png"
-    content: "With Astro, you can build modern and content-focused websites without sacrificing performance or ease of use."
+  - title: "Langkah Mudah Menuju Bisnis yang Lebih Modern"
+    image: "/images/service-2.png"
+    content: "Dengan proses yang terukur dan transparan, saya mengubah kerumitan infrastruktur digital menjadi aset yang mendukung pertumbuhan bisnis Anda."
     bulletpoints:
-      - "Instantly load static sites for better user experience and SEO."
-      - "Intuitive syntax and support for popular frameworks make learning and using Astro a breeze."
-      - "Use any front-end library or framework, or build custom components, for any project size."
-      - "Built on cutting-edge technology to keep your projects up-to-date with the latest web standards."
+      - "**Audit Menyeluruh:** Pengecekan kesehatan jaringan, server, dan perangkat untuk memetakan risiko serta peluang optimasi yang tepat."
+      - "**Solusi Tepat Guna:** Rekomendasi infrastruktur terbaik yang dirancang khusus untuk skala bisnis Anda saat ini maupun masa depan."
+      - "**Implementasi Standar Industri:** Pengerjaan profesional dengan dokumentasi lengkap, memastikan sistem Anda aman, stabil, dan mudah dikelola."
+    button:
+      enable: true
+      label: "Diskusikan Kebutuhan Anda Sekarang"
+      link: "#"
+
+  - title: "Kenapa Memilih Saya?"
+    image: "/images/service-3.png"
+    content: "Lebih dari sekadar IT support, saya adalah partner strategis yang memastikan teknologi bekerja untuk kemajuan bisnis Anda."
+    bulletpoints:
+      - "**14+ Tahun Pengalaman:** Rekam jejak panjang dalam menangani berbagai infrastruktur IT dengan solusi yang sudah teruji."
+      - "**Transparansi Penuh:** Laporan pengadaan hardware dan rincian teknis yang jujur, transparan, dan mudah dipahami."
+      - "**Dukungan Responsif:** Respon cepat dan solusi tangkas tanpa birokrasi, langsung terhubung dengan ahli IT Anda."
     button:
       enable: false
       label: ""

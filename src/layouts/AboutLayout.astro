@@ -1,0 +1,58 @@
+---
+import Base from "@/layouts/Base.astro";
+const { title, description, meta_title, image } = Astro.props.frontmatter;
+---
+
+<Base title={title} meta_title={meta_title} description={description} image={image}>
+  <section class="section-sm bg-white dark:bg-darkmode-body">
+    <div class="container">
+      <div class="row justify-start"> <div class="lg:col-8 md:col-8 text-left">
+          <header class="mb-10 border-b pb-8 dark:border-darkmode-border">
+            <h1 class="h2 mb-2 text-left">{title}</h1>
+            <p class="text-primary text-lg font-medium">IT Infrastructure & Network Administrator</p>
+          </header>
+          
+          <article class="content-cv prose max-w-none dark:prose-invert">
+            <slot />
+          </article>
+        </div>
+
+        <div class="lg:col-4 md:col-4 hidden md:block">
+          <aside class="sticky top-24 pl-10">
+            <div class="bg-theme-light dark:bg-darkmode-theme-light p-6 rounded-lg border border-border dark:border-darkmode-border">
+              <h4 class="h5 mb-4 border-b pb-2 text-left text-dark dark:text-darkmode-light">Navigasi</h4>
+              <ul class="space-y-3 text-sm font-medium text-left list-none p-0 m-0">
+                <li><a href="#profil-profesional" class="hover:text-primary block py-1 border-l-2 border-transparent hover:border-primary pl-2">01. Profil</a></li>
+                <li><a href="#pengalaman-profesional" class="hover:text-primary block py-1 border-l-2 border-transparent hover:border-primary pl-2">02. Pengalaman</a></li>
+                <li><a href="#keahlian-utama" class="hover:text-primary block py-1 border-l-2 border-transparent hover:border-primary pl-2">03. Keahlian</a></li>
+                <li><a href="#sertifikasi" class="hover:text-primary block py-1 border-l-2 border-transparent hover:border-primary pl-2">04. Sertifikasi</a></li>
+                <li><a href="#pendidikan" class="hover:text-primary block py-1 border-l-2 border-transparent hover:border-primary pl-2">05. Pendidikan</a></li>
+                <li><a href="#kontak--hubungan" class="hover:text-primary block py-1 border-l-2 border-transparent hover:border-primary pl-2">06. Kontak</a></li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  /* RESET GLOBAL UNTUK LAYOUT INI */
+  .section-sm, .container, .row, .col-12, .content-cv {
+    text-align: left !important; /* MATIKAN CENTER DARI TEMA */
+  }
+
+  .content-cv h3, .content-cv h4 {
+    @apply text-left mt-8 mb-4 font-bold !important;
+  }
+
+  .content-cv ul {
+    @apply list-disc pl-5 mb-6 text-left !important;
+  }
+
+  .content-cv table {
+    @apply w-full my-6 border-collapse text-left !important;
+  }
+</style>

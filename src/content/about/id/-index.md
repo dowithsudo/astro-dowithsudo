@@ -1,10 +1,48 @@
 ---
-title: "Hey, I am John Doe!"
-meta_title: "About"
-description: "this is meta description"
-lang: "id"
-image: "/images/avatar.png"
-draft: false
+layout: "../../layouts/AboutLayout.astro"
+title: "Kamandanu Tresna Wijaya"
+meta_title: "Tentang - Kamandanu Tresna Wijaya"
+description: "IT Infrastructure & Network Administrator dengan pengalaman lebih dari 15 tahun."
 ---
-indo
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis illum nesciunt commodi vel nisi ut alias excepturi ipsum, totam, labore tempora, odit ex iste tempore sed. Fugit voluptatibus perspiciatis assumenda nulla ad nihil, omnis vel, doloremque sit quam autem optio maiores, illum eius facilis et quo consectetur provident dolor similique! Enim voluptatem dicta expedita veritatis repellat dolorum impedit, provident quasi at.
+
+### Profil Profesional
+Administrator Infrastruktur & Jaringan IT dengan **pengalaman lebih dari 15 tahun** dalam mengelola dan mendukung lingkungan IT enterprise. Meskipun secara resmi berjabatan sebagai IT Support, tanggung jawab saya mencakup **administrasi server, infrastruktur jaringan, ketersediaan sistem, keamanan, serta operasional IT skala enterprise.**
+
+---
+
+### Pengalaman Profesional
+
+#### **PT Geoservices**
+**Juli 2022 – Sekarang** | Bekasi, Indonesia
+* Mengelola infrastruktur IT enterprise: server, perangkat jaringan, firewall, NAS, CCTV, dan PABX.
+* Menjaga ketersediaan sistem melalui monitoring proaktif, perawatan terstruktur, dan strategi backup.
+
+---
+
+### Keahlian Utama
+
+| Bidang | Teknologi |
+| :--- | :--- |
+| **Infrastruktur** | Windows & Linux Server, Virtualisasi (Proxmox, VMware), NAS |
+| **Jaringan** | MikroTik, Firewall, Switching, Network Monitoring |
+
+---
+
+### Sertifikasi
+
+* **Google IT Support** — Google / Coursera
+* **Ethical Hacker** — Cisco Networking Academy
+
+---
+
+### Pendidikan
+
+**SMK Toga Terang 2**
+*Teknik Mesin Otomotif (2000 – 2003)*
+
+---
+
+### Kontak & Hubungan
+
+* **Email:** kamandanu.wijaya@gmail.com
+* **WhatsApp:** +62 812 2233 129

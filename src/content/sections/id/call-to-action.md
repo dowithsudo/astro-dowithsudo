@@ -1,11 +1,11 @@
 ---
 enable: true
-title: "indo Ready to build your next project with Astro?"
+title: "Serahkan Masalah IT Anda Pada Ahlinya"
 lang: "id"
 image: "/images/call-to-action.png"
-description: "Experience the future of web development with Astroplate and Astro. Build lightning-fast static sites with ease and flexibility."
+description: "Optimalkan infrastruktur digital kantor Anda dengan sistem yang stabil dan aman. Bayar sesuai kebutuhan, dapatkan hasil standar industri."
 button:
   enable: true
-  label: "Get Started Now"
+  label: "Konsultasi Gratis"
   link: "https://github.com/zeon-studio/astroplate"
 ---

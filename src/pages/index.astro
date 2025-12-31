@@ -7,15 +7,20 @@ import CallToAction from "@/partials/CallToAction.astro";
 import Testimonial from "@/partials/Testimonial.astro";
 import { FaCheck } from "react-icons/fa";
 
-// Ambil konten dari sub-folder 'id'
+// 1. Ambil konten. Gunakan casting 'any' sementara jika skema config.ts belum diupdate
+// Astroplate biasanya mencari ID tanpa folder jika menggunakan getListPage standar, 
+// tapi karena kita sudah modifikasi semalam, kita pakai path yang sesuai.
 const homepage = await getListPage("homepage", "id/-index");
 const call_to_action = await getListPage("ctaSection", "id/call-to-action");
 const testimonial = await getListPage("testimonialSection", "id/testimonial");
 
-const { banner, features } = homepage.data;
+// 2. Gunakan Casting untuk menghindari error "Property does not exist"
+const data = homepage.data as any;
+const { banner, features, title, meta_title, description } = data;
+
 const { pathname } = Astro.url;
 
-// Fungsi agar link tombol tetap di folder bahasa yang benar (jika diperlukan)
+// 3. Fungsi agar link tombol tetap di folder bahasa yang benar
 const isEn = pathname.startsWith("/en");
 const getRelativeUrl = (url: string) => {
   if (!isEn) return url;
@@ -24,7 +29,11 @@ const getRelativeUrl = (url: string) => {
 };
 ---
 
-<Base title={homepage.data.title} meta_title={homepage.data.meta_title} description={homepage.data.description}>
+<Base 
+  title={title} 
+  meta_title={meta_title} 
+  description={description}
+>
   <section class="section pt-14">
     <div class="container">
       <div class="row justify-center">
@@ -65,8 +74,9 @@ const getRelativeUrl = (url: string) => {
       </div>
     </div>
   </section>
+  
   {
-    features.map((feature, index: number) => (
+    features.map((feature: any, index: number) => (
       <section class={`section-sm ${index % 2 === 0 && "bg-gradient"}`}>
         <div class="container">
           <div class="row items-center justify-between">
@@ -103,6 +113,7 @@ const getRelativeUrl = (url: string) => {
       </section>
     ))
   }
+  
   <Testimonial testimonial={testimonial} />
   <CallToAction call_to_action={call_to_action} />
 </Base>
