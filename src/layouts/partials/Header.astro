@@ -35,10 +35,11 @@ const getRelativeUrl = (url: string) => {
 ---
 
 <header class={`header z-30 ${settings.sticky_header && "sticky top-0"}`}>
-  <nav class="navbar container">
+  <nav class="navbar container flex justify-between items-center">
     <div class="order-0">
       <Logo />
     </div>
+
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
@@ -55,9 +56,10 @@ const getRelativeUrl = (url: string) => {
           transform="rotate(45 10 10)"></polygon>
       </svg>
     </label>
+
     <ul
       id="nav-menu"
-      class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
+      class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:mx-auto lg:space-x-2 lg:pb-0 xl:space-x-8"
     >
       {
         main.map((menu) => (
@@ -103,7 +105,7 @@ const getRelativeUrl = (url: string) => {
               <li class="nav-item">
                 <a
                   href={getRelativeUrl(menu.url)}
-                  class={`nav-link block ${
+                  class={`nav-link block text-[17px] font-semibold ${
                     (pathname === getRelativeUrl(menu.url) || pathname === `${getRelativeUrl(menu.url)}/`) && "active"
                   }`}
                 >
@@ -128,7 +130,7 @@ const getRelativeUrl = (url: string) => {
       }
     </ul>
 
-    <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
+    <div class="order-1 flex items-center md:order-2">
       <LanguageSwitcher />
       {
         settings.search && (
