@@ -3,7 +3,7 @@
 banner:
   title: "Miliki Departemen IT Sendiri Tanpa Biaya Operasional yang Tinggi"
   content: "Mulai dari pemilihan hardware, setting jaringan aman, hingga jaga sistem tetap online 24/7. Solusi IT profesional dengan pendekatan personal dan transparan."
-  image: "/images/banner2.png"
+  image: "/images/hero.png"
   lang: "id"
   button:
     enable: true
@@ -13,7 +13,7 @@ banner:
 # Features
 features:
   - title: "Anda Urus Bisnis, Biar Kami Urus IT Anda"
-    image: "/images/service-1.png"
+    image: "/images/service-main.png"
     content: >-
       Jangan biarkan kendala teknis menghambat operasional. Dengan pengalaman lebih dari **14 tahun**, kami siap mengambil alih seluruh permasalahan IT Anda agar Anda bisa kembali fokus dalam **mengembangkan bisnis**.
     bulletpoints:
@@ -41,7 +41,7 @@ features:
       link: "#"
 
   - title: "Kenapa Memilih Saya?"
-    image: "/images/service-3.png"
+    image: "/images/why.png"
     content: "Lebih dari sekadar IT support, saya adalah partner strategis yang memastikan teknologi bekerja untuk kemajuan bisnis Anda."
     bulletpoints:
       - "**14+ Tahun Pengalaman:** Rekam jejak panjang dalam menangani berbagai infrastruktur IT dengan solusi yang sudah teruji."

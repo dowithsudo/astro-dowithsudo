@@ -3,7 +3,7 @@
 banner:
   title: "Get Your Own IT Department Without High Operational Costs"
   content: "From hardware selection and secure network setup to keeping systems online 24/7. Professional IT solutions with a personal and transparent approach."
-  image: "/images/banner2.png"
+  image: "/images/hero.png"
   lang: "en"
   button:
     enable: true
@@ -13,7 +13,7 @@ banner:
 # Features
 features:
   - title: "Focus on Your Business, Let Us Handle Your IT"
-    image: "/images/service-1.png"
+    image: "/images/service-main.png"
     content: >-
       Don't let technical obstacles hinder your operations. With over **14 years** of experience, we are ready to take over all your IT challenges so you can get back to focusing on **growing your business**.
     bulletpoints:
@@ -41,7 +41,7 @@ features:
       link: "#"
 
   - title: "Why Choose Us?"
-    image: "/images/service-3.png"
+    image: "/images/why.png"
     content: "More than just IT support, we are strategic partners ensuring technology works for your business progress."
     bulletpoints:
       - "**14+ Years of Experience:** A long track record in handling various IT infrastructures with proven solutions."
