@@ -3,7 +3,7 @@
 banner:
   title: "Get Your Own IT Department Without High Operational Costs"
   content: "From hardware selection and secure network setup to keeping systems online 24/7. Professional IT solutions with a personal and transparent approach."
-  image: "/images/banner.png"
+  image: "/images/banner2.png"
   lang: "en"
   button:
     enable: true

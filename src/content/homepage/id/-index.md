@@ -3,7 +3,7 @@
 banner:
   title: "Miliki Departemen IT Sendiri Tanpa Biaya Operasional yang Tinggi"
   content: "Mulai dari pemilihan hardware, setting jaringan aman, hingga jaga sistem tetap online 24/7. Solusi IT profesional dengan pendekatan personal dan transparan."
-  image: "/images/banner.png"
+  image: "/images/banner2.png"
   lang: "id"
   button:
     enable: true
